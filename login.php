@@ -20,9 +20,11 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     while ($row = mysqli_fetch_array($sql, MYSQLI_ASSOC)){
 		$username = $row["username"];
 		$password = $row["password"];
+		$user_ID = $row["user_ID"];
 		}
     if ($user == $username && $pass == $password ) { 
 		 $_SESSION["user"] = $user;
+		 $_SESSION["user_ID"] = $user_ID;
 		 header("location: index.php");
          exit();
     } else {

@@ -78,18 +78,27 @@ if (isset ($_POST['floorball']))
 {	
 	if (isset ($_POST['check']))
 	{
-			$emails = $_POST['check'];
+		$emails = $_POST['check'];
+		$check = mysqli_query($link, "SELECT email FROM `floorball_list` WHERE username='$user'");
+		$existCount = mysqli_num_rows($check); // count the row nums
+		if ($existCount != 0) { // user has a list
+			foreach($emails as $email)
+			{				
+				while ($data = mysqli_fetch_array($check, MYSQLI_ASSOC))
+				{
+					foreach($data as $key => $var)
+					{	
+						if($email != $var){
+							echo 'Do not Add this email to DB--'.$email.'<br/>';
+							exit();
+							}	
+					}
+					
+				}
+			}
 
-	foreach($emails as $email)
-		{
-			$sql = "INSERT INTO `floorball_list` (`id`, `email`, `username`) VALUES (NULL, '$email', '$user');";
-			$query = mysqli_query($link, $sql) or die(mysqli_error($link));
-		}
-	echo '<script>
- 			alert ("Imported DONE!");
-			window.location = "floorball.php";
-		  </script>';
-	exit();
+		}	
+		exit();
 	}
 	
 	else 
@@ -97,7 +106,7 @@ if (isset ($_POST['floorball']))
 		echo '<script>
 				alert ("Please choose at least 1 email to import!!!");
 				isValid = false;
-		  	  </script>';
+			  </script>';
 	}
 
 }
@@ -160,7 +169,6 @@ $(document).ready(function() {
             <li><a href="badminton.php">Badminton List</a></li>
             <li><a href="floorball.php">Floor Ball List</a></li>
             <li><a href="https://accounts.google.com/o/oauth2/auth?client_id=822743733345-kgbatntpncb9l0v8829n5l15t98k333m.apps.googleusercontent.com&redirect_uri=http://localhost/jolly_v1/import.php&scope=https://www.google.com/m8/feeds/&response_type=code">Import Contact</a></li>
-            <li><a href="chat.php">Chat</a></li>
             <li><a href="logout.php">Sign Out</a></li>
           </ul>
         </div>
@@ -200,7 +208,7 @@ $(document).ready(function() {
           <div>
             <h2>Hello <span style="text-transform:uppercase; color:rgba(96,85,85,1.00)"><?php echo $user;?></span> , here is your contact list:</h2>
           </div>
-          <form action="index.php" method="post">
+          <form action="test2.php" method="post">
             <table width="600" height="118" border="1" style="">
               <tbody>
                 <?php echo $email_list;?>

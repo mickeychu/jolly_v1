@@ -49,3 +49,22 @@ a.play{position:absolute;bottom:10px!important;bottom:2px;right:10px!important;r
 a:hover.play{background:url(play_h.png) no-repeat;}
 a.stop{position:absolute;bottom:10px!important;bottom:2px;right:10px!important;right:2px;width:40px; height:40px; margin:0; outline:none; display:block;background:url(pause.png) no-repeat;text-indent:-999em; border:none;cursor:pointer;}
 a:hover.stop{background:url(pause_h.png) no-repeat;}
+
+#chatBig{
+	width:500px;
+	height:452px;
+	border:1px solid #000000;
+	margin:auto;
+	}
+#chatDisplay{
+	width:500px;
+	height:400px;
+	border-bottom:1px solid #CF292C;
+	}
+#chatMessage{
+	width:495px;
+	height:48px;
+	border:1px solid #CF292C;
+	
+	}
+#chatText:focus{outline:none}
